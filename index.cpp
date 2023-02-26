@@ -1,31 +1,44 @@
 #include <iostream>
 
+struct ListNode {
+    int value;
+    ListNode *next;
+};
 
+ListNode *head = NULL;
 
 int main(void){
+    std::cout<<"Enter number of integers in the list"<<std::endl;
+    int numVal;
+    std::cin>>numVal;
 
-    int *list1 = (int*) malloc(3 * sizeof(int));
-    int *list2 = (int*) malloc(3 * sizeof(int));
-    list1[0] = 8;
-    list1[1] = 4;
-    list1[2] = 3;
-    list2[0] = 5;
-    list2[1] = 1;
-    list2[2] = 9;
-    for(int i = 0; i < 3; i++){
-        std::cout<<list1[i]<<" "<<&list1[i]<<std::endl;
-    }
-    for(int i = 0; i < 3; i++){
-        std::cout<<list2[i]<<" "<<&list2[i]<<std::endl;
-    }
-    list1[3] = 7;
-    for(int i = 0; i < 3; i++){
-        std::cout<<list1[i]<<" "<<&list1[i]<<std::endl;
-    }
-    for(int i = 0; i < 3; i++){
-        std::cout<<list2[i]<<" "<<&list2[i]<<std::endl;
-    }
-    free(list1);
-    free(list2);
-    
+    int i = 0;
+    ListNode *temp;
+    while(i < numVal){
+        int newVal = 0;
+        std::cout<<"Enter your value: ";
+        std::cin>>newVal;
+        temp = head;
+        ListNode *newNode = (struct ListNode*) malloc(sizeof(ListNode));
+        newNode->value = newVal;
+        newNode->next = NULL;
+
+        if(head) {
+            while(temp->next != NULL){
+                temp = temp->next;
+            };
+            temp->next = newNode;
+        } else {
+            head = newNode;
+        }
+        i++;
+    };
+
+    std::cout<<"Display created list: "<<std::endl;
+    temp = head;
+    while(temp != NULL){
+        std::cout<<temp->value<<' ';
+        temp = temp->next;
+    };
+    std::cout<<' '<<std::endl;
 };
