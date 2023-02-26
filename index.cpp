@@ -1,44 +1,66 @@
 #include <iostream>
 
-struct ListNode {
-    int value;
-    ListNode *next;
-};
+class List {
+    public:
+        int size(){
+            ListNode *temp = head;
+            if(temp == NULL){
+                return 0;
+            } else {
+                int sizeVal = 0;
+                while(temp != NULL){
+                    temp = temp->next;
+                    sizeVal++;
+                };
+                return sizeVal;
+            };
+        }
 
-ListNode *head = NULL;
+        void push_front(int newValue){
 
-int main(void){
-    std::cout<<"Enter number of integers in the list"<<std::endl;
-    int numVal;
-    std::cin>>numVal;
+        };
 
-    int i = 0;
-    ListNode *temp;
-    while(i < numVal){
-        int newVal = 0;
-        std::cout<<"Enter your value: ";
-        std::cin>>newVal;
-        temp = head;
-        ListNode *newNode = (struct ListNode*) malloc(sizeof(ListNode));
-        newNode->value = newVal;
-        newNode->next = NULL;
+        void push_back(int newValue){
+            ListNode *newNode = (struct ListNode*) malloc(sizeof(ListNode));
+            ListNode *temp = head;
+            newNode->value = newValue;
+            newNode->next = NULL;
+            if(head){
+                while(temp->next){
+                    temp = temp->next;
+                };
+                temp->next = newNode;
+            } else {
+                head = newNode;
+            };
+        };
 
-        if(head) {
-            while(temp->next != NULL){
+        void display(){
+            ListNode *temp = head;
+            while(temp){
+                std::cout<<temp->value<<' '<<temp->next<<std::endl;
                 temp = temp->next;
             };
-            temp->next = newNode;
-        } else {
-            head = newNode;
-        }
-        i++;
-    };
+            std::cout<<std::endl;
+        };
 
-    std::cout<<"Display created list: "<<std::endl;
-    temp = head;
-    while(temp != NULL){
-        std::cout<<temp->value<<' ';
-        temp = temp->next;
-    };
-    std::cout<<' '<<std::endl;
+    private:
+        struct ListNode {
+            int value;
+            ListNode *next;
+        };
+        ListNode *head = NULL;
+        
+};
+
+
+int main(void){
+
+    List list;
+    list.push_back(6);
+    list.push_back(4);
+    list.push_back(1);
+    list.push_back(2);
+    list.display();
+
 };
